@@ -1,0 +1,242 @@
+/* -------- Base styles -------- */
+:root{
+  --bg:#0f335c;
+  --panel:#295b9a;
+  --accent:#76d672;
+  --text:#e6f0ff;
+  --muted:#c9dcff;
+  --card:#1c4374;
+  --grid:#dfe8ff33;
+}
+
+*{box-sizing:border-box}
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  background: linear-gradient(180deg, var(--bg), #5684b4);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;  /* Cambio aquí para permitir un layout más flexible */
+  min-height: 100%;
+  overflow-y: auto;  /* Habilitar scroll */
+}
+
+
+.container{
+  width:min(1100px, 95%);
+  margin:40px auto;
+  background:var(--panel);
+  border-radius:16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  overflow:hidden;
+  border:1px solid #0b2b4f;
+}
+
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:16px 20px;
+  background: linear-gradient(180deg, #1a4a85, #153c6b);
+  border-bottom:1px solid #0b2b4f;
+}
+
+.brand{
+  display:flex;align-items:center;gap:12px;
+}
+.brand__avatar{
+  width:54px;height:54px;border-radius:50%;
+  background:#f59754;
+  display:grid;place-items:center;
+  color:#172b4d;font-weight:800;
+  border:3px solid #ffe1c9;
+}
+.brand__title{font-weight:700;letter-spacing:.3px}
+.brand__subtitle{font-size:.9rem;color:var(--muted)}
+
+.nav{
+  display:flex;gap:10px;flex-wrap:wrap;
+}
+.nav a{
+  text-decoration:none;
+  background:var(--accent);
+  color:#08361c;
+  font-weight:700;
+  padding:10px 14px;
+  border-radius:10px;
+  border:2px solid #2b6d2e;
+  transition:.2s transform ease, .2s filter ease;
+}
+.nav a:hover{ transform: translateY(-2px); filter:brightness(1.02); color: #295b9a; }
+
+.content{
+  display:grid;
+  grid-template-columns: 1fr;
+}
+.section{
+  padding:28px 22px;
+  background: var(--panel);
+}
+.section + .section{border-top:1px solid #0b2b4f}
+.section h2{margin:0 0 10px;font-size:1.25rem}
+.section p{margin:6px 0 12px; color:#e9f3ff;}
+
+/* Cards */
+/* Estilos para las tarjetas de contenido del CV */
+.card {
+  background: #1c4374;
+  border-radius: 10px;
+  border: 1px solid #0d2f57;
+  padding: 20px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .03);
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card ul,
+.card table {
+  padding-left: 20px;
+}
+
+.card li {
+  margin-bottom: 6px;
+  list-style-type: disc;
+  color: #e9f3ff;
+}
+
+.card th,
+.card td {
+  padding: 8px 12px;
+  border: 1px dashed #1a4a85;
+  color: #e9f3ff;
+}
+
+.card th {
+  font-weight: bold;
+}
+
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.card .section-heading {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #e9f3ff;
+}
+
+.grid{display:grid;gap:16px}
+.grid.cols-2{grid-template-columns:repeat(2, minmax(0,1fr))}
+.grid.cols-3{grid-template-columns:repeat(3, minmax(0,1fr))}
+@media (max-width:800px){
+  .grid.cols-2,.grid.cols-3{grid-template-columns:1fr}
+}
+
+/* Contenedor ovalado */
+.oval {
+  width: 200px;
+  height: 200px;
+  border-radius: 999px; /* Forma ovalada */
+  background: #f59754;
+  border: 6px solid #ffe1c9;
+  overflow: hidden; /* 🔹 Asegura que todo lo que sobresalga sea recortado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto; /* Centra el contenedor */
+}
+
+/* Imagen dentro del contenedor ovalado */
+.imagenPerfil {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 🔹 Rellena el contenedor sin deformar la imagen */
+  object-position: center; /* 🔹 Centra la imagen */
+}
+
+/* Asegura que el body tenga la capacidad de hacer scroll */
+body {
+  min-height: 100vh;
+  overflow-y: scroll;
+}
+
+
+/* Simple table for CV lists */
+.table{
+  width:100%;border-collapse:collapse;
+}
+.table th,.table td{
+  border-bottom:1px dashed #1a4a85;
+  padding:10px 8px;text-align:left;
+}
+
+/* Schedule grid */
+.schedule{
+  width:min(520px,100%);
+  margin:auto;
+  border:1px solid #0d2f57;
+  border-radius:10px;
+  overflow:hidden;
+}
+.schedule__head{display:grid;grid-template-columns:repeat(7,1fr);background:#1a4a85}
+.schedule__head div{padding:10px 8px;text-align:center;font-weight:700}
+.schedule__body{display:grid;grid-template-columns:repeat(7,1fr);}
+.schedule__cell{aspect-ratio:1 / 1;padding:8px;border:1px solid #0f2e57;background:var(--grid)}
+.schedule__cell span{font-size:.85rem}
+
+/* Footer */
+.footer{
+  padding:12px 20px;
+  background: #133259;
+  color:#b8d1ff;
+  font-size:.9rem;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid #0b2b4f;
+}
+.footer a{color:#cfe2ff}
+
+.schedule {
+  width: min(520px, 100%);
+  margin: auto;
+  border: 1px solid #0d2f57;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.schedule__head {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: #1a4a85;
+}
+
+.schedule__head div {
+  padding: 10px 8px;
+  text-align: center;
+  font-weight: 700;
+  color: #e6f0ff;
+}
+
+.schedule__body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.schedule__cell {
+  aspect-ratio: 1 / 1;
+  padding: 8px;
+  border: 1px solid #0f2e57;
+  background: #dfe8ff33;
+  color: #e6f0ff;
+}
+
+.schedule__cell span {
+  font-size: .85rem;
+}
