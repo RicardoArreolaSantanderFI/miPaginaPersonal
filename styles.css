@@ -21,11 +21,6 @@ body {
   overflow-y: auto;  /* Habilitar scroll */
 }
 
-.dias{
-  margin-left: 70px;
-}
-
-
 .container{
   width:min(1100px, 95%);
   margin:40px auto;
@@ -184,7 +179,7 @@ body {
 
 /* Schedule grid */
 .schedule{
-  width:min(520px,100%);
+  width:min(600px,100%);
   margin:auto;
   border:1px solid #0d2f57;
   border-radius:10px;
@@ -206,41 +201,3 @@ body {
   border-top:1px solid #0b2b4f;
 }
 .footer a{color:#cfe2ff}
-
-.schedule {
-  width: min(520px, 100%);
-  margin: auto;
-  border: 1px solid #0d2f57;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.schedule__head {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  background: #1a4a85;
-}
-
-.schedule__head div {
-  padding: 10px 8px;
-  text-align: center;
-  font-weight: 700;
-  color: #e6f0ff;
-}
-
-.schedule__body {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-}
-
-.schedule__cell {
-  aspect-ratio: 1 / 1;
-  padding: 8px;
-  border: 1px solid #0f2e57;
-  background: #dfe8ff33;
-  color: #e6f0ff;
-}
-
-.schedule__cell span {
-  font-size: .85rem;
-}
