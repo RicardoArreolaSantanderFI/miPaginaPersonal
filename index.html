@@ -1,61 +1,314 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Home | Ricardo Arreola</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ricardo Arreola Santander — Portafolio</title>
+  <meta name="description" content="Portafolio de Ricardo Arreola Santander: desarrollador full‑stack (Django/React), proyectos, experiencia, certificaciones, habilidades y contacto." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a4a85'/><text x='50' y='58' font-size='44' text-anchor='middle' fill='%23fff' font-family='Arial, Helvetica, sans-serif'>RA</text></svg>">
+  <style>
+    :root{
+      --bg:#0f335c;--panel:#295b9a;--card:#1c4374;--text:#e6f0ff;--muted:#c9dcff;--accent:#76d672;--ink:#0b2b4f;
+      --chip:#153c6b;--chip-border:#0f2e57;--grid:#dfe8ff33
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,Helvetica,sans-serif;background:linear-gradient(180deg,var(--bg),#5684b4);color:var(--text)}
+    .wrap{width:min(1100px,95%);margin:32px auto;background:var(--panel);border:1px solid var(--ink);border-radius:16px;box-shadow:0 12px 36px rgba(0,0,0,.35);overflow:hidden}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;background:linear-gradient(180deg,#1a4a85,#153c6b);border-bottom:1px solid var(--ink);position:sticky;top:0;z-index:5}
+    .brand{display:flex;align-items:center;gap:12px}
+    .avatar{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#f59754;color:#172b4d;font-weight:800;border:3px solid #ffe1c9}
+    .title{font-weight:800;letter-spacing:.3px}
+    .subtitle{font-size:.9rem;color:var(--muted)}
+    nav{display:flex;gap:10px;flex-wrap:wrap}
+    nav a{display:inline-block;text-decoration:none;background:var(--accent);color:#08361c;font-weight:800;padding:10px 14px;border-radius:10px;border:2px solid #2b6d2e;transition:.2s transform,.15s filter}
+    nav a:hover{transform:translateY(-2px);filter:brightness(1.03)}
+    main section{padding:28px 22px}
+    section + section{border-top:1px solid var(--ink)}
+    h1{margin:0;font-size:clamp(1.6rem,2.5vw,2rem)}
+    h2{margin:0 0 10px;font-size:1.25rem}
+    p{margin:8px 0 12px}
+    .grid{display:grid;gap:16px}
+    .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:900px){.cols-2,.cols-3{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid #0d2f57;border-radius:12px;padding:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+    .list{padding-left:18px}
+    .list li{margin:6px 0}
+    .badge{display:inline-flex;gap:8px;flex-wrap:wrap}
+    .chip{display:inline-block;padding:8px 10px;border-radius:999px;background:var(--chip);border:1px solid var(--chip-border);font-weight:600}
+    .oval{width:160px;height:160px;border-radius:999px;background:#f59754;border:6px solid #ffe1c9;overflow:hidden;margin:auto}
+    .oval img{width:100%;height:100%;object-fit:cover}
+    .kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .kpis div{background:#163763;border:1px solid var(--ink);border-radius:10px;text-align:center;padding:10px}
+    .kpis strong{font-size:1.4rem;display:block}
+    .timeline{position:relative}
+    .timeline:before{content:"";position:absolute;left:14px;top:0;bottom:0;width:2px;background:#0f2e57}
+    .t-item{position:relative;padding-left:36px;margin:14px 0}
+    .t-item:before{content:"";position:absolute;left:7px;top:6px;width:16px;height:16px;border-radius:50%;background:#76d672;border:2px solid #2b6d2e}
+    .table{width:100%;border-collapse:collapse}
+    .table th,.table td{border-bottom:1px dashed #1a4a85;padding:10px 8px;text-align:left}
+    .schedule{width:min(700px,100%);border:1px solid #0d2f57;border-radius:10px;overflow:hidden;margin:auto}
+    .s-head{display:grid;grid-template-columns:repeat(5,1fr);background:#1a4a85}
+    .s-head div{padding:10px 8px;text-align:center;font-weight:800}
+    .s-body{display:grid;grid-template-columns:repeat(5,1fr)}
+    .s-cell{aspect-ratio:1/1;padding:8px;border:1px solid #0f2e57;background:var(--grid)}
+    .s-cell span{font-size:.9rem}
+    footer{padding:12px 20px;background:#133259;color:#b8d1ff;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--ink)}
+    footer a{color:#cfe2ff}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:2px solid #2b6d2e;background:var(--accent);color:#08361c;font-weight:800;text-decoration:none}
+    .btn.ghost{background:#153c6b;color:#e6f0ff;border-color:#0f2e57}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
 </head>
 <body>
-  <main class="container">
-    <header class="header">
+  <div class="wrap">
+    <header>
       <div class="brand">
-        <div class="brand__avatar">RAS</div>
+        <div class="avatar" aria-hidden>RA</div>
         <div>
-          <div class="brand__title">Ricardo Arreola Santander</div>
-          <div class="brand__subtitle">Sitio personal</div>
+          <div class="title">Ricardo Arreola Santander</div>
+          <div class="subtitle">Desarrollador Full‑Stack · Django · React</div>
         </div>
       </div>
-      <nav class="nav">
-        <a href="index.html" aria-current="page">HP</a>
-        <a href="personal-info.html">PI</a>
-        <a href="personal-schedule.html">PS</a>
-        <a href="cv.html">CV</a>
+      <nav aria-label="Principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#skills">Habilidades</a>
+        <a href="#certificaciones">Certificaciones</a>
+        <a href="#educacion">Educación</a>
+        <a href="#horario">Horario</a>
+        <a href="#contacto">Contacto</a>
       </nav>
     </header>
 
-    <section class="section">
-      <div class="oval">
-        <img src="img/ImagenPerfil.jpeg" alt="ImagenPerfil" class="imagenPerfil">
-      </div>
-      <h2 style="text-align:center;margin-top:16px;">Ricardo Arreola Santander</h2>
-    </section>
+    <main>
+      <!-- HERO -->
+      <section id="inicio" aria-labelledby="h-hero">
+        <h1 id="h-hero" class="sr-only">Inicio</h1>
+        <div class="grid cols-2" style="align-items:center">
+          <div class="card">
+            <h2>Hola, soy Ricardo 👋</h2>
+            <p style="text-align:justify">Desarrollador full‑stack con enfoque en <strong>Django</strong>, <strong>React</strong> y <strong>PostgreSQL</strong>. He construido y mantenido plataformas académicas y administrativas en UNAM y gané el <strong>primer lugar</strong> en el hackatón <em>LiverHack</em> de El Puerto de Liverpool (2025), destacando por soluciones escalables y un delivery rápido.</p>
+            <div class="actions" style="margin-top:10px">
+              <a class="btn" href="#contacto">Hablemos</a>
+              <a class="btn ghost" href="CV_RicardoArreolaSantander.pdf" target="_blank" rel="noopener">Ver CV (PDF)</a>
+            </div>
+            <div class="kpis" style="margin-top:14px">
+              <div><strong>+3</strong><span>años creando apps web</span></div>
+              <div><strong>1º lugar</strong><span>LiverHack 2025</span></div>
+              <div><strong>UNAM</strong><span>Ing. en Computación</span></div>
+            </div>
+          </div>
+          <div>
+            <div class="oval" aria-hidden>
+              <!-- Reemplaza por tu imagen en ./img/ImagenPerfil.jpeg -->
+              <img src="img/ImagenPerfil.jpeg" alt="Foto de perfil de Ricardo" />
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <section class="section">
-      <div class="grid cols-3">
-        <div class="card">
-          <h3>Personal Info (PI)</h3>
-          <p>Conoce quién soy, mis gustos y hobbies.</p>
-          <p><a class="navlink" href="personal-info.html">Ir a PI →</a></p>
+      <!-- SOBRE MI -->
+      <section id="sobre-mi" aria-labelledby="h-about">
+        <h2 id="h-about">Sobre mí</h2>
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Resumen</h3>
+            <p style="text-align:justify">Soy de CDMX y actualmente curso el último semestre de Ingeniería en Computación en la Facultad de Ingeniería (UNAM). En el Laboratorio de Multimedia e Internet (LMEI) me desempeño como desarrollador y apoyo docente, enfocándome en automatización de reportes con Python, back‑end en Django y front‑end con React.</p>
+            <table class="table" style="margin-top:6px">
+              <tr><th>Ciudad</th><td>Ciudad de México</td></tr>
+              <tr><th>Correo</th><td><a href="mailto:rikkysantander@gmail.com">rikkysantander@gmail.com</a></td></tr>
+              <tr><th>Teléfono</th><td><a href="tel:+525549620965">+52 55 4962 0965</a></td></tr>
+              <tr><th>GitHub</th><td><a href="http://github.com/RicardoArreolaSantanderFI" target="_blank" rel="noopener">github.com/RicardoArreolaSantanderFI</a></td></tr>
+              <tr><th>LinkedIn</th><td><a href="https://www.linkedin.com/in/ricardo-arreola-santander-b5a876374/" target="_blank" rel="noopener">linkedin.com/in/ricardo-arreola-santander-b5a876374</a></td></tr>
+            </table>
+          </div>
+          <div class="card">
+            <h3>Lo que me gusta</h3>
+            <p style="text-align:justify">Fútbol y running; música (rock, ópera y pop); y en tecnología, backend en Python/Django y front‑end en React para interfaces dinámicas. Me interesan también la mitología y la historia.</p>
+            <h3 style="margin-top:12px">Hobbies</h3>
+            <p style="text-align:justify">Escribir y estudiar, cursos en línea (UX/UI, sysadmin, front‑end), coleccionar figuras (Star Wars y Caballeros del Zodiaco) y mantener mis proyectos y archivos ordenados.</p>
+          </div>
         </div>
-        <div class="card">
-          <h3>Personal Schedule (PS)</h3>
-          <p>Calendario semanal con mis horarios y actividades.</p>
-          <p><a class="navlink" href="personal-schedule.html">Ir a PS →</a></p>
-        </div>
-        <div class="card">
-          <h3>Currículum (CV)</h3>
-          <p>Resumen, educación, experiencia y más.</p>
-          <p><a class="navlink" href="cv.html">Ir a CV →</a></p>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <footer class="footer">
-      <span>Página Personal. Materia Redes de Datos Seguras</span>
-      <span>Contacto: <a href="mailto:rikkysantander@gmail.com">rikkysantander@gmail.com</a></span>
+      <!-- EXPERIENCIA -->
+      <section id="experiencia" aria-labelledby="h-exp">
+        <h2 id="h-exp">Experiencia</h2>
+        <div class="grid cols-2">
+          <div class="card timeline">
+            <div class="t-item">
+              <h3 style="margin:0">Desarrollador Full‑Stack — LMEI, UNAM <small style="opacity:.8">(2023 – Presente)</small></h3>
+              <ul class="list">
+                <li>Back‑end con Django y PostgreSQL; front‑end con React.</li>
+                <li>Automatización de constancias y reportes Excel con Python.</li>
+                <li>Despliegues en Linux con Nginx como proxy inverso.</li>
+                <li>Mejoras de rendimiento y usabilidad en sistemas académicos.</li>
+              </ul>
+            </div>
+            <div class="t-item">
+              <h3 style="margin:0">Desarrollador de Soluciones Rápidas — LiverHack, El Puerto de Liverpool <small style="opacity:.8">(2025 · 1º lugar)</small></h3>
+              <ul class="list">
+                <li>Prototipo con Django, HTML/CSS y JS integrando servicios cloud.</li>
+                <li>Enfoque en escalabilidad, diseño limpio y eficiencia de reclutadores.</li>
+                <li>Entrega y despliegue en servidor en tiempo limitado.</li>
+              </ul>
+            </div>
+            <div class="t-item">
+              <h3 style="margin:0">Oficinista — Ostria, Coyoacán <small style="opacity:.8">(2021 – 2022)</small></h3>
+              <ul class="list">
+                <li>Mantenimiento y gestión de bases de datos (CRUD).</li>
+                <li>Documentación y organización administrativa.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Tech stack</h3>
+            <div class="badge" style="margin:10px 0 2px">
+              <span class="chip">Python</span>
+              <span class="chip">Django</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">React</span>
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">SQL</span>
+              <span class="chip">PostgreSQL</span>
+              <span class="chip">MySQL</span>
+              <span class="chip">Docker</span>
+              <span class="chip">Nginx</span>
+              <span class="chip">Pandas</span>
+              <span class="chip">NumPy</span>
+              <span class="chip">OpenPyXL</span>
+              <span class="chip">Git/GitHub</span>
+              <span class="chip">Linux</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROYECTOS -->
+      <section id="proyectos" aria-labelledby="h-proj">
+        <h2 id="h-proj">Proyectos destacados</h2>
+        <div class="grid cols-2">
+          <article class="card">
+            <h3>Sistema de Gestión de Información de Horarios — UNAM</h3>
+            <ul class="list">
+              <li>Lideré planificación, diseño y desarrollo; análisis automatizado de Excel.</li>
+              <li>Detección de errores y reportes automáticos en PDF, XLSX y DOCX.</li>
+              <li>Manual de usuario/instalación y despliegue con contenedores.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Sistema de Control de Calificaciones — Facultad de Ingeniería</h3>
+            <ul class="list">
+              <li>Apoyo a docentes y estudiantes con interfaz web moderna.</li>
+              <li>Optimización del flujo de evaluación y almacenamiento de datos.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" aria-labelledby="h-skills">
+        <h2 id="h-skills">Habilidades</h2>
+        <div class="grid cols-3">
+          <div class="card">
+            <h3>Lenguajes</h3>
+            <p>Python, C, JavaScript, HTML, CSS, SQL</p>
+          </div>
+          <div class="card">
+            <h3>Herramientas</h3>
+            <p>Django, React, Node.js, Docker, Nginx, Pandas, NumPy, OpenPyXL</p>
+          </div>
+          <div class="card">
+            <h3>Dev & Data</h3>
+            <p>PostgreSQL, MySQL, Git/GitHub, Linux, CI/CD básico</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CERTIFICACIONES -->
+      <section id="certificaciones" aria-labelledby="h-certs">
+        <h2 id="h-certs">Certificaciones y cursos</h2>
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Cursos impartidos</h3>
+            <ul class="list">
+              <li>Python intermedio — F11‑2025‑CP‑01‑C06‑C08</li>
+              <li>React — F11‑2025‑CP‑01‑C07‑C03</li>
+            </ul>
+            <h3 class="" style="margin-top:12px">Cursos tomados</h3>
+            <ul class="list">
+              <li>QA Tester — F11‑2023‑CP‑01‑C10‑C11</li>
+              <li>Network — F11‑2023‑CP‑01‑C11‑C04</li>
+              <li>Django — F11‑2024‑CP‑01‑C03‑C02</li>
+              <li>JavaScript — F11‑2024‑CP‑01‑C06‑C02</li>
+              <li>HTML & CSS — F11‑2024‑CP‑01‑C07‑C03</li>
+              <li>SQL Database Design — F11‑2024‑CP‑01‑C14‑C06</li>
+              <li>Excel con Python — F11‑2024‑CP‑01‑C15‑C06</li>
+            </ul>
+            <div class="actions" style="margin-top:10px">
+              <a class="btn ghost" href="F11-2023-CP-01-C10-C11.pdf" target="_blank" rel="noopener">Ver constancia QA Tester</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Reconocimientos</h3>
+            <ul class="list">
+              <li><strong>1º lugar</strong> — LiverHack 2025, El Puerto de Liverpool.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCACION -->
+      <section id="educacion" aria-labelledby="h-edu">
+        <h2 id="h-edu">Educación</h2>
+        <div class="card">
+          <table class="table">
+            <tr><th>Programa</th><td>Ingeniería en Computación (último semestre)</td></tr>
+            <tr><th>Institución</th><td>UNAM — Facultad de Ingeniería</td></tr>
+            <tr><th>Periodo</th><td>Agosto 2021 — Presente</td></tr>
+            <tr><th>Enfoque</th><td>Desarrollo de software, mantenimiento de hardware y diseño de sistemas</td></tr>
+          </table>
+        </div>
+      </section>
+      <!-- CONTACTO -->
+      <section id="contacto" aria-labelledby="h-contact">
+        <h2 id="h-contact">Contacto</h2>
+        <div class="grid cols-2">
+          <div class="card">
+            <p>¿Te interesa colaborar o tienes una vacante? Escríbeme:</p>
+            <p><strong>Email:</strong> <a href="mailto:rikkysantander@gmail.com">rikkysantander@gmail.com</a></p>
+            <p><strong>Teléfono:</strong> <a href="tel:+525549620965">+52 55 4962 0965</a></p>
+            <div class="actions" style="margin-top:6px">
+              <a class="btn" href="./constancias/CV_RicardoArreolaSantander.pdf" target="_blank" rel="noopener">Descargar CV</a>
+              <a class="btn ghost" href="F11-2023-CP-01-C10-C11.pdf" target="_blank" rel="noopener">Ver constancia QA</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Perfiles</h3>
+            <ul class="list">
+              <li><a href="http://github.com/RicardoArreolaSantanderFI" target="_blank" rel="noopener">GitHub — RicardoArreolaSantanderFI</a></li>
+              <li><a href="https://www.linkedin.com/in/ricardo-arreola-santander-b5a876374/" target="_blank" rel="noopener">LinkedIn — ricardo‑arreola‑santander</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="y"></span> Ricardo Arreola Santander</span>
+      <span>Hecho con HTML + CSS puro</span>
     </footer>
-  </main>
+  </div>
+
+  <script>
+    // Año dinámico
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-
